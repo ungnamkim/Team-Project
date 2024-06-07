@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starry Night with Galaxy</title>
+    <title>Starry Night</title>
     <style>
         body, html {
             margin: 0;
@@ -27,51 +27,31 @@
             background: white;
             opacity: 0.8;
             box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2s infinite ease-in-out;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg) translateY(0) rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg) translateY(0) rotate(-360deg);
-            }
-        }
-
-        .galaxy {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 1000px;
-            height: 1000px;
-            transform: translate(-50%, -50%);
-            animation: rotate 120s linear infinite;
-        }
     </style>
 </head>
 <body>
-    <div class="star-field">
-        <div class="galaxy" id="galaxy"></div>
-    </div>
+    <div class="star-field" id="star-field"></div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const galaxy = document.getElementById('galaxy');
-            const starCount = 500;
+            const starField = document.getElementById('star-field');
+            const starCount = 1000;
 
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                star.style.width = `${Math.random() * 3}px`;
+                star.style.width = `${Math.random() * 2}px`;
                 star.style.height = star.style.width;
-                star.style.top = `${Math.random() * 1000}px`;
-                star.style.left = `${Math.random() * 1000}px`;
-                star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite ease-in-out`;
-                galaxy.appendChild(star);
+                star.style.top = `${Math.random() * window.innerHeight}px`;
+                star.style.left = `${Math.random() * window.innerWidth}px`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+                starField.appendChild(star);
             }
         });
     </script>
